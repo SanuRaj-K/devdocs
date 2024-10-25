@@ -12,7 +12,7 @@ export const Projects = () => {
 
   const FolderIcon = ({ color }) => (
     <svg
-     className="  h-[30px] w-[30px] md:h-[50px] md:w-[50px]"
+     className="  h-[30px] w-[30px] md:h-[45px] md:w-[45px]"
       viewBox="0 0 60 60"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -68,12 +68,12 @@ export const Projects = () => {
                     </div>
                     <div className="px-5 fc font-poppins">
                       <div>
-                        <span className="truncate text-wrap text-[14px] lg:text-[18px] font-medium">
+                        <span className="truncate text-wrap text-[14px] lg:text-[16px] font-medium">
                           {item.title}
                         </span>
                       </div>
 
-                      <span className="truncate text-[10px] lg:text-[14px]">
+                      <span className="truncate text-[10px] lg:text-[12px]">
                         {item.desc}
                       </span>
                     </div>
