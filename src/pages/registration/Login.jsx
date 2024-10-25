@@ -1,22 +1,26 @@
-import React from "react";
+import React, { useState } from "react";
 import RightImage from "../../assets/images/registration/computer.svg";
 import Eyeicon from "../../assets/icons/eye.svg";
+import hideEye from "../../assets/icons/hide.png";
 import rightArrow from "../../assets/icons/right-arrow.svg";
 export const Login = () => {
+  const [showPassword, setShowPassword] = useState(false);
   return (
     <div>
       <section className=" font-sora lg:font-rubik">
-        <div className=" flex flex-col lg:flex-row  lg:fb    items-center">
-          <div className="px-10 lg:py-16 py-3  flex md:justify-center lg:justify-normal xl:h-screen    w-full lg:w-1/2 bg-[#EBF5FF] ">
+        <div className=" flex flex-col lg:flex-row min-h-screen  lg:fb    items-center">
+          <div className="px-10 lg:py-16 py-3  flex md:justify-center lg:justify-normal lg:h-screen    w-full lg:w-1/2 bg-[#EBF5FF] ">
             <img
-              className=" w-[570px] p-5 lg:p-0 lg:h-[500px]"
+              className=" w-[570px]   p-5 lg:p-10 xl:h-full xl:w-full my-auto  lg:h-[500px]"
               src={RightImage}
               alt="computer"
             />
           </div>
           <div className="px-10 py-7 lg:py-16  w-full lg:w-1/2">
-            <div className=" lg:h-[500px] my-auto ">
-              <h1 className=" text-[20px] lg:text-[32px] font-semibold text-center">Login</h1>
+            <div className=" lg:h-[500px]  ">
+              <h1 className=" text-[20px] lg:text-[32px] font-semibold text-center">
+                Login
+              </h1>
               <form className=" mt-5 lg:mt-10 lg:px-20" action="">
                 <div className=" flex flex-col">
                   <label
@@ -28,6 +32,7 @@ export const Login = () => {
                   <input
                     className=" border-2 px-3 outline-none rounded-sm h-[40px] border-[#BAE4FF] bg-[#F4F9FC]"
                     type="text"
+                    required
                     name="email"
                     placeholder="Enter your email"
                     id="email"
@@ -44,13 +49,15 @@ export const Login = () => {
                     <input
                       placeholder="Enter your password"
                       className="border-2 px-3 w-full outline-none rounded-sm h-[40px] border-[#BAE4FF] bg-[#F4F9FC] pr-10"
-                      type="password"
+                      type={showPassword ? "text" : "password"}
                       name="password"
+                      required
                       id="password"
                     />
                     <img
-                      className="absolute right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
-                      src={Eyeicon}
+                      onClick={() => setShowPassword((prev) => !prev)}
+                      className="absolute  size-4 lg:size-6 right-3 top-1/2 transform -translate-y-1/2 cursor-pointer"
+                      src={showPassword ? hideEye : Eyeicon}
                       alt="eye"
                     />
                   </div>
@@ -83,10 +90,7 @@ export const Login = () => {
                 </div>
                 <div className=" lg:hidden bg-[#3399FF] group rounded-md mt-7 mb-5 text-white">
                   <button className=" flex  items-center content-center justify-center w-full py-2 ">
-                    <span className=" font-medium text-[14px]">
-                    login
-                    </span>
-                     
+                    <span className=" font-medium text-[14px]">login</span>
                   </button>
                 </div>
               </form>
