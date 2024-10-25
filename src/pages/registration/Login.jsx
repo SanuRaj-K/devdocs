@@ -64,8 +64,9 @@ export const Login = () => {
                 </div>
                 <div className=" flex items-center mt-3">
                   <input
-                    className="  size-3 bg-black checked:bg-black"
+                    className="  size-3 bg-black"
                     type="checkbox"
+                    
                     name="remember"
                     id="remember"
                   />
