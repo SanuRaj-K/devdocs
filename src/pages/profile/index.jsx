@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import personIcon from "../../assets/icons/account.svg";
 import { projectData } from "../../constants/projectsData";
 import dots from "../../assets/icons/3dot.svg";
 
 export const Projects = () => {
+  const [searchQuery, setSearchQuery] = useState("");
   const colors = ["#FDBF50", "#DD6243", "#4D725D"];
 
   function getRandomColor() {
@@ -12,7 +13,7 @@ export const Projects = () => {
 
   const FolderIcon = ({ color }) => (
     <svg
-     className="  h-[30px] w-[30px] md:h-[45px] md:w-[45px]"
+      className="h-[30px] w-[30px] md:h-[45px] md:w-[45px]"
       viewBox="0 0 60 60"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
@@ -30,60 +31,88 @@ export const Projects = () => {
     </svg>
   );
 
+  const filteredProjects = projectData.filter((item) =>
+    item.title.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
   return (
     <div>
       <div>
-        <section className="fb pt-10 px-7">
-          <div className="fc">
-            <span className="font-albert text-[22px] md:text-[26px] font-semibold capitalize">
-              Hello, Hishasm
-            </span>
-            <span className="font-poppins text-[12px] ">
-              Here is your Projects Details
-            </span>
+        <section className=" sm:flex sm:justify-between items-center pt-10 px-7">
+          <div className=" flex  items-center justify-between">
+            <div className="fc    ">
+              <span className="font-albert text-[16px] sm:text-[22px] md:text-[26px] font-semibold capitalize">
+                Hello, Hishasm
+              </span>
+              <span className="font-poppins text-[10px] md:text-[12px] ">
+                Here is your Projects Details
+              </span>
+            </div>
+            <div className=" sm:hidden">
+              <img
+                className="cursor-pointer size-5"
+                src={personIcon}
+                alt="icon"
+              />
+            </div>
+          </div>
+          <div>
+            <input
+              className="border-2 mt-2  text-[10px] md:text-[14px] outline-none pl-3 rounded-md"
+              placeholder="search project"
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
           </div>
           <div>
             <img
-              className="cursor-pointer size-8"
+              className="cursor-pointer hidden sm:block size-8"
               src={personIcon}
               alt="icon"
             />
           </div>
         </section>
-        <section className="bg-white  rounded-md shadow-2xl  w-[95%] mx-auto  lg:px-7 mt-20">
+        <section className="bg-white rounded-md shadow-2xl w-[95%] mx-auto lg:px-7 mt-10 md:mt-20">
           <div>
             <h1 className="font-poppins text-[20px] p-3 font-semibold">
               Projects
             </h1>
 
             <ul className="px-4 py-7 grid gap-y-3 lg:gap-x-10 grid-cols-1 sm:grid-cols-2 md:gap-x-10 xl:grid-cols-3">
-              {projectData?.map((item, index) => (
-                <li
-                  className="fb hover:bg-gray-400 p-2 rounded-md relative lg:min-w-[400px]"
-                  key={index}
-                >
-                  <div className="cursor-pointer flex items-center">
-                    <div className="p-1">
-                      <FolderIcon color={getRandomColor()} />
-                    </div>
-                    <div className="px-5 fc font-poppins">
-                      <div>
-                        <span className="truncate text-wrap text-[14px] lg:text-[16px] font-medium">
-                          {item.title}
+              {filteredProjects.length === 0 ? (
+                <li className="text-center text-gray-500 font-medium">
+                  No projects found
+                </li>
+              ) : (
+                filteredProjects.map((item, index) => (
+                  <li
+                    className="fb hover:bg-gray-400 p-2 rounded-md relative lg:min-w-[400px]"
+                    key={index}
+                  >
+                    <div className="cursor-pointer flex items-center">
+                      <div className="p-1">
+                        <FolderIcon color={getRandomColor()} />
+                      </div>
+                      <div className="px-5 fc font-poppins">
+                        <div>
+                          <span className="truncate text-wrap text-[14px] lg:text-[16px] font-medium">
+                            {item.title}
+                          </span>
+                        </div>
+
+                        <span className="truncate text-[10px] lg:text-[12px]">
+                          {item.desc}
                         </span>
                       </div>
-
-                      <span className="truncate text-[10px] lg:text-[12px]">
-                        {item.desc}
-                      </span>
                     </div>
-                  </div>
 
-                  <div  className=" mt-3">
-                    <img className="cursor-pointer h-4" src={dots} alt="" />
-                  </div>
-                </li>
-              ))}
+                    <div className="mt-3">
+                      <img className="cursor-pointer h-4" src={dots} alt="" />
+                    </div>
+                  </li>
+                ))
+              )}
             </ul>
           </div>
         </section>
