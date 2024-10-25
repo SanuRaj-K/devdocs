@@ -6,6 +6,8 @@ module.exports = {
       fontFamily: {
         rubik: ["Rubik", "sans-serif"],
         sora: ["Sora", "sans-serif"],
+        albert: ["Albert", "sans-serif"],
+        poppins:["poppins", "sans-serif"], 
       },
     },
   },

@@ -1,4 +1,10 @@
- .fb{
-    display: flex;
+ .fb {
+     display: flex;
      justify-content: space-between;
+ }
+
+ .fc {
+
+     display: flex;
+     flex-direction: column;
  }
