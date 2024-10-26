@@ -20,8 +20,8 @@ export const NotFound = () => {
   }, [count]);
   return (
     <div className=" h-screen w-full flex items-center justify-center content-center">
-      <span>
-        Wait <span className=" font-bold">{count}</span> seconds to redirect to Home
+      <span className="text-2xl">
+        Wait <span className="  font-bold">{count}</span> seconds for redirect to Home
       </span>
     </div>
   );
