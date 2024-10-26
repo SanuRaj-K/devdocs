@@ -80,7 +80,7 @@ export const Home = () => {
             <p className=" mt-4 md:my-5  text-[12px] md:text-[14px] leading-[24px] ">
               This is a sample Pet Store Server based on the OpenAPI 3.0
               specification. You can find out more about Swagger at{" "}
-              <a href=" http://swagger.io" className=" font-medium underline">
+              <a href=" http://swagger.io" className=" md:text-[14px] text-[12px] font-medium underline">
                 {" "}
                 http://swagger.io.
               </a>{" "}
