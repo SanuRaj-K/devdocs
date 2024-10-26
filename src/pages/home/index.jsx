@@ -14,6 +14,7 @@ import TemporaryDrawer from "../../components/drawer";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { TestRun } from "../../components/run-test";
+import { Details } from "../../components/details";
 export const Home = () => {
   const [toggleRun, setToggleRun] = useState(false);
   const [copyText, setCopyText] = useState(false);
@@ -144,19 +145,31 @@ export const Home = () => {
                 ))}
               </ul>
             </div>
+            <div className=" w-full">
+              <Details  selectedTitle={selectedTitle} />
+              <Details />
+              <Details />
+              <Details />
+              <Details />
+              <Details />
+              <Details />
+              <Details />
+              <Details />
+              <Details />
+            </div>
 
-            <div className="   md:px-10 w-full xl:w-3/4">
+            {/* <div className="   md:px-10 w-full xl:w-3/4">
               <div>
-                <h1 className=" text-[22px] md:text-[24px]  font-bold">
+                <h1 className=" text-[22px]    md:text-[24px]  font-bold">
                   {selectedTitle ? selectedTitle : "update an existing pet"}
                 </h1>
                 <span className=" text-[14px] md:text-[16px]">
                   Update an existing pet by Id
                 </span>
               </div>
-              <h2 className=" text-[20px] mt-5 font-semibold">Request Body</h2>
+              <h2 className=" text-[20px] mt-5 font-semibold"> Request Body</h2>
               <div className="font-inter border-b-2   border-[#A7A7A7]  mt-5 pb-10 md:mt-5 flex-col md:flex-row flex md:justify-between w-full">
-                <div className="w-full lg:w-2/3 rounded-lg p-3 border-2 bg-[#F9FAFC] overflow-y-auto h-[400px] md:h-auto">
+                <div className="w-full lg:w-2/3 rounded-lg p-3 border-2 bg-[#F9FAFC] overflow-y-auto   ">
                   <ul className=" text-[14px] ">
                     <li className=" border-b-2 py-2">name string</li>
                     <li className=" border-b-2 py-2">
@@ -230,7 +243,7 @@ export const Home = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="w-full xl:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between max-h-[300px]">
+                <div className="w-full xl:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
                   <div>
                     <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
                       <div>
@@ -263,35 +276,25 @@ export const Home = () => {
                     </div>
                   </div>
 
-                  <div className="flex border-t-2 pt-3 text-[12px]   border-[#DDDDDD]  mt-10 items-center justify-end">
+                  <div className="flex relative border-t-2 pt-3 text-[12px]   border-[#DDDDDD]  mt-10 items-center justify-end">
                     <span className="mr-5">show example in</span>
-                    <div className="relative text-[12px]">
-                      <div
-                        className="flex items-center bg-white px-3 py-1 rounded-lg cursor-pointer"
-                        onClick={toggleDropdown}
-                      >
-                        <span className="mr-5">{selectedLanguage}</span>
-                        <img src={select} alt="select" />
-                      </div>
+                    <img
+                      className="  absolute  right-0 z-10 "
+                      src={select}
+                      alt="select"
+                    />
 
-                      {isOpen && (
-                        <div className="absolute top-0 text-[12px] bg-white border rounded-lg mt-2 w-full">
-                          {languages.map((language, index) => (
-                            <div
-                              key={index}
-                              onClick={() => handleLanguageSelect(language)}
-                              className="px-3 py-2 hover:bg-gray-200 cursor-pointer"
-                            >
-                              {language}
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
+                    <select className=" px-3 rounded-md  appearance-none h-[30px] ">
+                      {languages.map((language, index) => (
+                        <option key={index} className=" " value={language}>
+                          {language}
+                        </option>
+                      ))}
+                    </select>
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
         </section>
         <section className="">
