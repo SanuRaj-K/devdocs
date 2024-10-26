@@ -3,20 +3,15 @@ import Logo from "../../assets/icons/logo.svg";
 import search from "../../assets/icons/search.svg";
 import account from "../../assets/icons/account.svg";
 import dots from "../../assets/icons/3dot.svg";
-import { apiSections, homeList } from "../../constants";
+import { apiSections } from "../../constants";
 import { Accordioncomp } from "../../components/accordion";
 import nested from "../../assets/icons/nested.svg";
 import play from "../../assets/icons/play.svg";
 import select from "../../assets/icons/select.svg";
-import MenuIcon from "@mui/icons-material/Menu";
 import TemporaryDrawer from "../../components/drawer";
-import MultipleSelect from "../../components/select";
 import { TestRun } from "../../components/run-test";
 export const Home = () => {
-  const [selectedIndex, setSelectedIndex] = useState(0);
-  const [moblieMenu, setMobileMenu] = useState(false);
   const [toggleRun, setToggleRun] = useState(false);
-
   const [showNested, setShowNexted] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState("C#");
@@ -33,9 +28,9 @@ export const Home = () => {
   };
   useEffect(() => {
     if (toggleRun) {
-      document.body.style.overflow = "hidden";  
+      document.body.style.overflow = "hidden";
     } else {
-      document.body.style.overflow = "unset"; 
+      document.body.style.overflow = "unset";
     }
   }, [toggleRun]);
   return (
@@ -64,6 +59,11 @@ export const Home = () => {
           </div>
         </div>
       </header>
+      <section className="sticky    top-0 z-30">
+        <div className="my-5  w-full backdrop-blur-2xl  py-2 bg-black/10  lg:hidden">
+          <TemporaryDrawer />
+        </div>
+      </section>
       <div className=" relative px-7">
         <section className=" font-poppins ">
           <div className="fb items-center">
@@ -92,46 +92,10 @@ export const Home = () => {
             </p>
           </div>
         </section>
-        {/* <section>
-          <ul className=" hidden mt-6 md:inline-grid  place-items-center grid-cols-2 sm:grid-cols-3  md:grid-cols-5 gap-x-4">
-            {homeList?.map((item, index) => (
-              <li
-                onClick={() => setSelectedIndex(index)}
-                className={`${
-                  selectedIndex === index ? "bg-[#C3C3C3]" : ""
-                }  capitalize cursor-pointer   font-medium px-5 py-2 rounded-md  inline  `}
-                key={index}
-              >
-                {item}
-              </li>
-            ))}
-          </ul>
-        </section> */}
-        {/* <section className="mt-5 relative   w-full z-10 backdrop-blur-xl">
-          <div
-            onClick={() => setMobileMenu((prev) => !prev)}
-            className="border-y-2 py-2"
-          >
-            <MenuIcon />
-            <span className="ml-2">Menu</span>
-          </div>
-          {moblieMenu && (
-            <section>
-              <ul className=" bg-red-300 h-screen">
-                {" "}
-                <li>hai</li>
-                <li>leoowF</li>
-              </ul>
-            </section>
-          )}
-        </section> */}
 
-        <div className=" md:hidden">
-          <TemporaryDrawer />
-        </div>
-        <section className="  py-20">
+        <section className="  py-5 md:py-20">
           <div className=" flex justify-between">
-            <div className=" hidden md:block md:w-1/4">
+            <div className=" hidden lg:block md:w-1/4">
               {" "}
               <ul className=" ">
                 {apiSections?.map((item, index) => (
@@ -141,7 +105,7 @@ export const Home = () => {
                 ))}
               </ul>
             </div>
-            <div className=" md:px-10 w-full md:w-3/4">
+            <div className=" md:px-10 w-full lg:w-3/4">
               <div>
                 <h1 className=" text-[22px] md:text-[26px]  font-medium">
                   Update an existing pet
@@ -152,7 +116,7 @@ export const Home = () => {
               </div>
               <h2 className=" text-[20px] md:text-[24px]">Request Body</h2>
               <div className="font-inter border-b-2   border-[#A7A7A7]  mt-5 pb-10 md:mt-10 flex-col md:flex-row flex md:justify-between w-full">
-                <div className=" w-full md:w-2/3  rounded-lg p-3 border-2 bg-[#F9FAFC]">
+                <div className="w-full lg:w-2/3 rounded-lg p-3 border-2 bg-[#F9FAFC] overflow-y-auto h-[400px] md:h-auto">
                   <ul className=" text-[16px] ">
                     <li className=" border-b-2 py-2">name string</li>
                     <li className=" border-b-2 py-2">
@@ -226,7 +190,7 @@ export const Home = () => {
                     </li>
                   </ul>
                 </div>
-                <div className=" w-full md:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between">
+                <div className="w-full lg:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between h-[400px]">
                   <div>
                     <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
                       <div>
@@ -237,7 +201,9 @@ export const Home = () => {
                         onClick={() => setToggleRun(true)}
                         className="flex items-center cursor-pointer bg-[#4E80ED] rounded-md px-3 py-1"
                       >
-                        <span className="text-white font-medium text-[14px]">Test</span>
+                        <span className="text-white font-medium text-[14px]">
+                          Test
+                        </span>
                         <img className="ml-2 size-3" src={play} alt="icon" />
                       </div>
                     </div>
@@ -283,14 +249,14 @@ export const Home = () => {
             </div>
           </div>
         </section>
-        <section>
+        <section className="">
           {toggleRun && (
-            <>
-              <div className="fixed inset-0 bg-black bg-opacity-50 z-20" />
-              <TestRun setToggleRun={setToggleRun} />
-            </>
+            <div className="fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50">
+              <div className="w-full  mx-5 lg:w-[80%] relative bg-[#f8f7fc] rounded-md">
+                <TestRun setToggleRun={setToggleRun} />
+              </div>
+            </div>
           )}
-          <button onClick={() => setToggleRun(true)}>Open Component</button>
         </section>
       </div>
     </div>
