@@ -92,10 +92,9 @@ export const Home = () => {
             </p>
           </div>
         </section>
-
-        <section className="  py-5 md:py-20">
+        <section className="  py-5 md:py-16">
           <div className=" flex justify-between">
-            <div className=" hidden xl:block md:w-1/4">
+            <div className=" hidden  sticky top-0  overflow-y-auto xl:block md:w-1/4">
               {" "}
               <ul className=" ">
                 {apiSections?.map((item, index) => (

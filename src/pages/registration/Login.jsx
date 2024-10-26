@@ -3,6 +3,7 @@ import RightImage from "../../assets/images/registration/computer.svg";
 import Eyeicon from "../../assets/icons/eye.svg";
 import hideEye from "../../assets/icons/hide.png";
 import rightArrow from "../../assets/icons/right-arrow.svg";
+import { Link } from "react-router-dom";
 export const Login = () => {
   const [showPassword, setShowPassword] = useState(false);
   return (
@@ -66,7 +67,6 @@ export const Login = () => {
                   <input
                     className="  size-3 bg-black"
                     type="checkbox"
-                    
                     name="remember"
                     id="remember"
                   />
@@ -78,16 +78,18 @@ export const Login = () => {
                   </span>
                 </div>
                 <div className=" hidden lg:block bg-[#3399FF] group rounded-md mt-7 mb-5 text-white">
-                  <button className=" flex  items-center content-center justify-center w-full py-2 ">
-                    <span className=" font-medium text-[14px]">
-                      Email login
-                    </span>
-                    <img
-                      className=" group-hover:transform group-hover:translate-x-2 transition-all duration-100 size-4  ml-2"
-                      src={rightArrow}
-                      alt="icon"
-                    />
-                  </button>
+                  <Link to={"/projects"}>
+                    <button className=" flex  items-center content-center justify-center w-full py-2 ">
+                      <span className=" font-medium text-[14px]">
+                        Email login
+                      </span>
+                      <img
+                        className=" group-hover:transform group-hover:translate-x-2 transition-all duration-100 size-4  ml-2"
+                        src={rightArrow}
+                        alt="icon"
+                      />
+                    </button>
+                  </Link>
                 </div>
                 <div className=" lg:hidden bg-[#3399FF] group rounded-md mt-7 mb-5 text-white">
                   <button className=" flex  items-center content-center justify-center w-full py-2 ">

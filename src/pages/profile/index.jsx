@@ -3,6 +3,7 @@ import personIcon from "../../assets/icons/account.svg";
 import { projectData } from "../../constants/projectsData";
 import dots from "../../assets/icons/3dot.svg";
 import { Folders } from "../../components/folders";
+import { Link } from "react-router-dom";
 
 export const Projects = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -61,16 +62,20 @@ export const Projects = () => {
                 </li>
               ) : (
                 filteredProjects.map((item, index) => (
+                  <Link to={"/home"}>
                   <li
                     className="fb hover:bg-gray-400 p-2 rounded-md relative lg:min-w-[400px]"
                     key={index}
                   >
-                    <Folders title={item.title} desc={item.desc} />
+                    
+                      <Folders title={item.title} desc={item.desc} />
 
-                    <div className="mt-3">
-                      <img className="cursor-pointer h-4" src={dots} alt="" />
-                    </div>
+                      <div className="mt-3">
+                        <img className="cursor-pointer h-4" src={dots} alt="" />
+                      </div>
+                    
                   </li>
+                  </Link>
                 ))
               )}
             </ul>
