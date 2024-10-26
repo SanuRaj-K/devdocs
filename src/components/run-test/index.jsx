@@ -23,7 +23,7 @@ export const TestRun = ({ setToggleRun }) => {
   return (
     <div>
       <section className="      ">
-        <div className="  flex  flex-col lg:flex-row  overflow-y-auto  bg-[#f8f7fc] rounded-md h-[500px] z-20">
+        <div className="  flex  flex-col lg:flex-row  overflow-y-auto  bg-[#f8f7fc] rounded-md h-[500px] z-50">
           <div className=" lg:w-1/2 relative bg-[#f8f7fc]  border-b-2 pb-10 lg:pb-0 lg:border-r-2   border-[#e2e8f0] px-2 md:p-3">
             <div className="">
               <div className=" flex flex-col mt-10 lg:mt-0  lg:flex-row ">

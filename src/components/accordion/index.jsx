@@ -4,24 +4,27 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
-export const Accordioncomp = ({ title, method }) => {
+export const Accordioncomp = ({ title, method, onSelectTitle }) => {
   return (
     <div className=" font-poppins">
-      <Accordion>
+      <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
           id="panel1-header"
-          className=" text-[14px] md:text-[20px] font-medium"
+          className=" text-[14px] md:text-[16px] font-semibold"
         >
-            
           {title}
         </AccordionSummary>
         <AccordionDetails>
           <ul>
             {method?.map((item, index) => (
-              <li className=" cursor-pointer my-2 w-[300px] flex justify-between items-center" key={index}>
-                <span className=" truncate text-[14px]">{item.name}</span>
+              <li
+                onClick={() => onSelectTitle(item.name)}
+                className=" hover:bg-black/10  py-1  px-1  rounded-md cursor-pointer my-1 w-[300px] flex justify-between items-center"
+                key={index}
+              >
+                <span className=" truncate text-[12px]">{item.name}</span>
                 <span
                   className={`${
                     item.method === "GET"
@@ -31,7 +34,7 @@ export const Accordioncomp = ({ title, method }) => {
                       : item.method === "POST"
                       ? "bg-[#38BDF8]"
                       : "bg-[#F87171]"
-                  } px-2 text-[12px]   text-white font-bold py-[2px] rounded-md`}
+                  } px-2 text-[10px]   text-white font-bold py-[2px] rounded-md`}
                 >
                   {item.method}
                 </span>

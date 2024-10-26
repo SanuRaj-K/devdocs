@@ -6,7 +6,7 @@ import { Login } from "./pages/registration/Login";
 
 function App() {
   return (
-    <div className="App">
+    <div className="App scroll-smooth">
       <main className=" ">
         <Routes>
           <Route path="/" index element={<Login />} />
