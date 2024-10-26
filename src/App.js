@@ -1,13 +1,15 @@
 import "./App.css";
-import { Projects } from "./pages/profile";
-import { Login } from "./pages/registration/Login";
+import { Home } from "./pages/home";
+// import { Projects } from "./pages/profile";
+// import { Login } from "./pages/registration/Login";
 
 function App() {
   return (
     <div className="App">
       <main className=" ">
         {/* <Login /> */}
-        <Projects />
+        {/* <Projects /> */}
+        <Home />
       </main>
     </div>
   );
