@@ -24,10 +24,10 @@ export const TestRun = ({ setToggleRun }) => {
     <div>
       <section className="      ">
         <div className="  flex  flex-col lg:flex-row  overflow-y-auto  bg-[#f8f7fc] rounded-md h-[500px] z-20">
-          <div className=" lg:w-1/2 relative bg-[#f8f7fc]  border-b-2 pb-10 lg:pb-0 lg:border-r-2   border-[#e2e8f0] p-3">
+          <div className=" lg:w-1/2 relative bg-[#f8f7fc]  border-b-2 pb-10 lg:pb-0 lg:border-r-2   border-[#e2e8f0] px-2 md:p-3">
             <div className="">
               <div className=" flex flex-col mt-10 lg:mt-0  lg:flex-row ">
-                <div className=" py-1 bg-white lg:w-[85%]  rounded-md  border-2">
+                <div className=" py-1 bg-white w-full lg:w-[85%]  rounded-md  border-2">
                   <span className="bg-[#f1f5f9] pl-2 text-[14px] border-r-2 font-semibold p-2">
                     PUT
                   </span>

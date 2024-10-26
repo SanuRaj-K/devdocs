@@ -95,7 +95,7 @@ export const Home = () => {
 
         <section className="  py-5 md:py-20">
           <div className=" flex justify-between">
-            <div className=" hidden lg:block md:w-1/4">
+            <div className=" hidden xl:block md:w-1/4">
               {" "}
               <ul className=" ">
                 {apiSections?.map((item, index) => (
@@ -105,7 +105,7 @@ export const Home = () => {
                 ))}
               </ul>
             </div>
-            <div className=" md:px-10 w-full lg:w-3/4">
+            <div className=" md:px-10 w-full xl:w-3/4">
               <div>
                 <h1 className=" text-[22px] md:text-[26px]  font-medium">
                   Update an existing pet
@@ -190,7 +190,7 @@ export const Home = () => {
                     </li>
                   </ul>
                 </div>
-                <div className="w-full lg:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between h-[400px]">
+                <div className="w-full xl:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between h-[400px]">
                   <div>
                     <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
                       <div>
@@ -252,7 +252,7 @@ export const Home = () => {
         <section className="">
           {toggleRun && (
             <div className="fixed inset-0 z-20 flex items-center justify-center bg-black bg-opacity-50">
-              <div className="w-full  mx-5 lg:w-[80%] relative bg-[#f8f7fc] rounded-md">
+              <div className="w-full  mx-3 lg:w-[80%] relative bg-[#f8f7fc] rounded-md">
                 <TestRun setToggleRun={setToggleRun} />
               </div>
             </div>
