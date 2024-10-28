@@ -3,7 +3,7 @@ import Logo from "../../assets/icons/logo.svg";
 import search from "../../assets/icons/search.svg";
 import account from "../../assets/icons/account.svg";
 import dots from "../../assets/icons/3dot.svg";
-import { apiSections, jsonData } from "../../constants";
+import { apiSections, jsonData, responseCode } from "../../constants";
 import { Accordioncomp } from "../../components/accordion";
 import nested from "../../assets/icons/nested.svg";
 import play from "../../assets/icons/play.svg";
@@ -14,14 +14,15 @@ import TemporaryDrawer from "../../components/drawer";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { TestRun } from "../../components/run-test";
-import { Details } from "../../components/details";
 export const Home = () => {
   const [toggleRun, setToggleRun] = useState(false);
   const [copyText, setCopyText] = useState(false);
+  const [selectedResponseCode, setSelectedResponseCode] = useState("200");
   const [showNested, setShowNexted] = useState(false);
+  const [showNestedResponse, setShowNextedResponse] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState("");
+
   const [isOpen, setIsOpen] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("C#");
 
   const languages = [
     "cURL",
@@ -44,10 +45,7 @@ export const Home = () => {
   const handleTitleSelect = (title) => {
     setSelectedTitle(title);
   };
-  const handleLanguageSelect = (language) => {
-    setSelectedLanguage(language);
-    setIsOpen(false);
-  };
+
   useEffect(() => {
     if (toggleRun) {
       document.body.style.overflow = "hidden";
@@ -94,7 +92,7 @@ export const Home = () => {
         </div>
       </header>
       <section className="sticky    top-0 z-30">
-        <div className="my-5  w-full backdrop-blur-2xl  py-2 bg-black/10  lg:hidden">
+        <div className="my-5  w-full backdrop-blur-2xl  py-2 bg-black/10  xl:hidden">
           <TemporaryDrawer />
         </div>
       </section>
@@ -145,20 +143,8 @@ export const Home = () => {
                 ))}
               </ul>
             </div>
-            <div className=" w-full">
-              <Details  selectedTitle={selectedTitle} />
-              <Details />
-              <Details />
-              <Details />
-              <Details />
-              <Details />
-              <Details />
-              <Details />
-              <Details />
-              <Details />
-            </div>
 
-            {/* <div className="   md:px-10 w-full xl:w-3/4">
+            <div className="   md:px-10 w-full xl:w-3/4">
               <div>
                 <h1 className=" text-[22px]    md:text-[24px]  font-bold">
                   {selectedTitle ? selectedTitle : "update an existing pet"}
@@ -167,134 +153,368 @@ export const Home = () => {
                   Update an existing pet by Id
                 </span>
               </div>
+              {/* Request body */}
               <h2 className=" text-[20px] mt-5 font-semibold"> Request Body</h2>
               <div className="font-inter border-b-2   border-[#A7A7A7]  mt-5 pb-10 md:mt-5 flex-col md:flex-row flex md:justify-between w-full">
-                <div className="w-full lg:w-2/3 rounded-lg p-3 border-2 bg-[#F9FAFC] overflow-y-auto   ">
-                  <ul className=" text-[14px] ">
-                    <li className=" border-b-2 py-2">name string</li>
-                    <li className=" border-b-2 py-2">
-                      <span className=" ">photoUrls</span>
-                      <span className=" ml-2 text-[#727272]">string[]</span>
-                    </li>
-                    <li className=" border-b-2 py-2">
-                      <span>id</span>
-                      <span className=" mx-2 text-[#727272]">integer</span>
-                      <span className="  font-medium px-[10px] text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                        Optional
-                      </span>{" "}
-                    </li>
-                    <li className=" border-b-2 py-2">
-                      <div>
+                <div className="w-full md:w-2/3  overflow-y-auto   ">
+                  <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
+                    <ul className=" text-[14px] ">
+                      <li className=" border-b-2 py-2">name string</li>
+                      <li className=" border-b-2 py-2">
+                        <span className=" ">photoUrls</span>
+                        <span className=" ml-2 text-[#727272]">string[]</span>
+                      </li>
+                      <li className=" border-b-2 py-2">
+                        <span>id</span>
+                        <span className=" mx-2 text-[#727272]">integer</span>
+                        <span className="  font-medium px-[10px] text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                          Optional
+                        </span>{" "}
+                      </li>
+                      <li className=" border-b-2 py-2">
                         <div>
-                          <span>Category</span>
-                          <span className=" ml-2 text-[#727272]">object[]</span>
-                          <span className=" font-medium text-[12px] px-[10px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                            Optional
-                          </span>
-                        </div>
-                        <div
-                          onClick={() => setShowNexted((prev) => !prev)}
-                          className=" inline-flex  items-center cursor-pointer my-4 border-2 border-[#DADADA] rounded-lg p-2 bg-white "
-                        >
-                          <img className=" size-4" src={nested} alt="nested" />
-                          <span className=" ml-2">
-                            {showNested ? "Hide" : "Show"} nested properties
-                          </span>
-                        </div>
-                        {showNested && (
-                          <div className=" border-2 rounded-lg p-2">
-                            <div className="  border-b-2 p-3 rounded-md ">
-                              <span>id</span>
-                              <span className=" text-[#727272] px-3">
-                                integer
-                              </span>
-                              <span className=" px-[10px]  font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                Optional
-                              </span>
-                            </div>
-                            <div>
+                          <div>
+                            <span>Category</span>
+                            <span className=" ml-2 text-[#727272]">
+                              object[]
+                            </span>
+                            <span className=" font-medium text-[12px] px-[10px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                              Optional
+                            </span>
+                          </div>
+                          <div
+                            onClick={() => setShowNexted((prev) => !prev)}
+                            className=" inline-flex  items-center cursor-pointer my-4 border-2 border-[#DADADA] rounded-lg p-2 bg-white "
+                          >
+                            <img
+                              className=" size-4"
+                              src={nested}
+                              alt="nested"
+                            />
+                            <span className=" ml-2">
+                              {showNested ? "Hide" : "Show"} nested properties
+                            </span>
+                          </div>
+                          {showNested && (
+                            <div className=" border-2 rounded-lg p-2">
                               <div className="  border-b-2 p-3 rounded-md ">
                                 <span>id</span>
                                 <span className=" text-[#727272] px-3">
-                                  string
+                                  integer
                                 </span>
-                                <span className="   text-black px-[10px] py-1 font-medium     text-[12px] border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                <span className=" px-[10px]  font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
                                   Optional
                                 </span>
                               </div>
+                              <div>
+                                <div className="  border-b-2 p-3 rounded-md ">
+                                  <span>id</span>
+                                  <span className=" text-[#727272] px-3">
+                                    string
+                                  </span>
+                                  <span className="   text-black px-[10px] py-1 font-medium     text-[12px] border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                    Optional
+                                  </span>
+                                </div>
+                              </div>
                             </div>
-                          </div>
-                        )}
-                      </div>
-                    </li>
-                    <li className="   mb-5">
-                      <div className=" my-2">
-                        <span>status</span>
-                        <span className=" ml-2 text-[#727272]">string</span>
-                        <span className=" px-[10px] font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                          Optional
-                        </span>
-                      </div>
-                      <div>
-                        <span className=" text-[#363636]">
-                          pet status in the store
-                        </span>
-                      </div>
-                    </li>
-                  </ul>
-                </div>
-                <div className="w-full xl:w-1/3 mt-10 md:mt-0 md:ml-10 bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
+                          )}
+                        </div>
+                      </li>
+                      <li className="   mb-5">
+                        <div className=" my-2">
+                          <span>status</span>
+                          <span className=" ml-2 text-[#727272]">string</span>
+                          <span className=" px-[10px] font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                            Optional
+                          </span>
+                        </div>
+                        <div>
+                          <span className=" text-[#363636]">
+                            pet status in the store
+                          </span>
+                        </div>
+                      </li>
+                    </ul>
+                  </div>
+                  <div className=" my-10">
+                  <hr />
+                  </div>
+                 
+                  {/* Responses */}
                   <div>
-                    <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
-                      <div>
-                        <span className="text-[#FACC15]">PUT</span>
-                        <span>/pet</span>
-                      </div>
-                      <div
-                        onClick={() => setToggleRun(true)}
-                        className="flex items-center cursor-pointer bg-[#4E80ED] rounded-md px-2 py-1"
-                      >
-                        <span className="text-white font-medium text-[12px]">
-                          Test
-                        </span>
-                        <img className="ml-2 size-2" src={play} alt="icon" />
-                      </div>
-                    </div>
-                    <div className="pb-3 group relative mt-3">
-                      <div
-                        onClick={handleCopy}
-                        className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
-                      >
-                        {copyText ? <DoneIcon /> : <ContentCopyIcon />}
-                      </div>
+                    <h1 className=" text-[20px] font-bold text-[#020817]">
+                      Responses
+                    </h1>
 
-                      <p className="text-[12px]">
-                        <SyntaxHighlighter language="json" style={coy}>
-                          {JSON.stringify(jsonData, null, 2)}
-                        </SyntaxHighlighter>
-                      </p>
+                    <div>
+                      <ul className=" my-3 inline-flex bg-[#f1f5f9] text-[#64748b] px-3 py-1 rounded-md text-[14px] font-medium">
+                        {responseCode?.map((item, index) => (
+                          <li
+                            onClick={() => setSelectedResponseCode(item)}
+                            key={index}
+                            className={`${
+                              selectedResponseCode === item
+                                ? " text-[#020817] rounded-md bg-white border-2 px-3"
+                                : ""
+                            } mx-3 cursor-pointer   `}
+                          >
+                            {item}
+                          </li>
+                        ))}
+                      </ul>
+                      {selectedResponseCode === "200" ? (
+                        <>
+                          <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
+                            <ul className=" text-[14px] ">
+                              <li className=" border-b-2 py-2">name string</li>
+                              <li className=" border-b-2 py-2">
+                                <span className=" ">photoUrls</span>
+                                <span className=" ml-2 text-[#727272]">
+                                  string[]
+                                </span>
+                              </li>
+                              <li className=" border-b-2 py-2">
+                                <span>id</span>
+                                <span className=" mx-2 text-[#727272]">
+                                  integer
+                                </span>
+                                <span className="  font-medium px-[10px] text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                  Optional
+                                </span>{" "}
+                              </li>
+                              <li className=" border-b-2 py-2">
+                                <div>
+                                  <div>
+                                    <span>Category</span>
+                                    <span className=" ml-2 text-[#727272]">
+                                      object[]
+                                    </span>
+                                    <span className=" font-medium text-[12px] px-[10px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                      Optional
+                                    </span>
+                                  </div>
+                                  <div
+                                    onClick={() =>
+                                      setShowNextedResponse((prev) => !prev)
+                                    }
+                                    className=" inline-flex  items-center cursor-pointer my-4 border-2 border-[#DADADA] rounded-lg p-2 bg-white "
+                                  >
+                                    <img
+                                      className=" size-4"
+                                      src={nested}
+                                      alt="nested"
+                                    />
+                                    <span className=" ml-2">
+                                      {showNestedResponse ? "Hide" : "Show"}{" "}
+                                      nested properties
+                                    </span>
+                                  </div>
+                                  {showNestedResponse && (
+                                    <div className=" border-2 rounded-lg p-2">
+                                      <div className="  border-b-2 p-3 rounded-md ">
+                                        <span>id</span>
+                                        <span className=" text-[#727272] px-3">
+                                          integer
+                                        </span>
+                                        <span className=" px-[10px]  font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                          Optional
+                                        </span>
+                                      </div>
+                                      <div>
+                                        <div className="  border-b-2 p-3 rounded-md ">
+                                          <span>id</span>
+                                          <span className=" text-[#727272] px-3">
+                                            string
+                                          </span>
+                                          <span className="   text-black px-[10px] py-1 font-medium     text-[12px] border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                            Optional
+                                          </span>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  )}
+                                </div>
+                              </li>
+                              <li className="   mb-5">
+                                <div className=" my-2">
+                                  <span>status</span>
+                                  <span className=" ml-2 text-[#727272]">
+                                    string
+                                  </span>
+                                  <span className=" px-[10px] font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
+                                    Optional
+                                  </span>
+                                </div>
+                                <div>
+                                  <span className=" text-[#363636]">
+                                    pet status in the store
+                                  </span>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </>
+                      ) : (
+                        <>
+                          <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
+                            <span className=" text-sm italic">
+                              No response Specified
+                            </span>
+                          </div>
+                        </>
+                      )}
                     </div>
                   </div>
+                </div>
+                <div className=" w-full md:w-1/3 mt-10 md:mt-0 md:ml-10 flex flex-col ">
+                  <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
+                    <div>
+                      <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
+                        <div>
+                          <span className="text-[#FACC15]">PUT</span>
+                          <span>/pet</span>
+                        </div>
+                        <div
+                          onClick={() => setToggleRun(true)}
+                          className="flex items-center cursor-pointer bg-[#4E80ED] rounded-md px-2 py-1"
+                        >
+                          <span className="text-white font-medium text-[12px]">
+                            Test
+                          </span>
+                          <img className="ml-2 size-2" src={play} alt="icon" />
+                        </div>
+                      </div>
+                      <div className="pb-3 group relative mt-3">
+                        <div
+                          onClick={handleCopy}
+                          className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
+                        >
+                          {copyText ? <DoneIcon /> : <ContentCopyIcon />}
+                        </div>
 
-                  <div className="flex relative border-t-2 pt-3 text-[12px]   border-[#DDDDDD]  mt-10 items-center justify-end">
-                    <span className="mr-5">show example in</span>
-                    <img
-                      className="  absolute  right-0 z-10 "
-                      src={select}
-                      alt="select"
-                    />
+                        <p className="text-[12px] ">
+                          <SyntaxHighlighter language="json" style={coy}>
+                            {JSON.stringify(jsonData, null, 2)}
+                          </SyntaxHighlighter>
+                        </p>
+                      </div>
+                    </div>
 
-                    <select className=" px-3 rounded-md  appearance-none h-[30px] ">
-                      {languages.map((language, index) => (
-                        <option key={index} className=" " value={language}>
-                          {language}
-                        </option>
-                      ))}
-                    </select>
+                    <div className="flex relative border-t-2 pt-3 text-[12px]   border-[#DDDDDD]  mt-10 items-center justify-end">
+                      <span className="mr-5">show example in</span>
+                      <img
+                        className="  absolute  right-0 z-10 "
+                        src={select}
+                        alt="select"
+                      />
+
+                      <select className=" px-3 rounded-md  appearance-none h-[30px] ">
+                        {languages.map((language, index) => (
+                          <option key={index} className=" " value={language}>
+                            {language}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                  {/* Request body examples */}
+                  <div className=" my-5">
+                    <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
+                      <div>
+                        <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
+                          <div>
+                            <span className=" text-sm">
+                              Request body example
+                            </span>
+                          </div>
+                        </div>
+                        <div className="pb-3 group relative mt-3">
+                          <div
+                            onClick={handleCopy}
+                            className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
+                          >
+                            {copyText ? <DoneIcon /> : <ContentCopyIcon />}
+                          </div>
+
+                          <p className="text-[12px] ">
+                            <SyntaxHighlighter language="json" style={coy}>
+                              {JSON.stringify(jsonData, null, 2)}
+                            </SyntaxHighlighter>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  {/* examples response */}
+                  <div>
+                    <div className=" my-5">
+                      <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
+                        <div className=" ">
+                          <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
+                            <div>
+                              <span className=" text-sm">
+                                Example Responses
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <ul className=" text-[12px] mt-3 flex">
+                              {responseCode?.map((item, index) => (
+                                <li
+                                  onClick={() => setSelectedResponseCode(item)}
+                                  className={`${
+                                    selectedResponseCode === item
+                                      ? " text-[#020817] rounded-md bg-white border-2 px-3"
+                                      : ""
+                                  } mx-3 cursor-pointer   `}
+                                  key={index}
+                                >
+                                  {item}
+                                </li>
+                              ))}
+                            </ul>
+                          </div>
+                          {selectedResponseCode === "200" ? (
+                            <>
+                              <div className="pb-3 group relative mt-3">
+                                <div
+                                  onClick={handleCopy}
+                                  className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
+                                >
+                                  {copyText ? (
+                                    <DoneIcon />
+                                  ) : (
+                                    <ContentCopyIcon />
+                                  )}
+                                </div>
+
+                                <p className="text-[12px] ">
+                                  <SyntaxHighlighter
+                                    language="json"
+                                    style={coy}
+                                  >
+                                    {JSON.stringify(jsonData, null, 2)}
+                                  </SyntaxHighlighter>
+                                </p>
+                              </div>
+                            </>
+                          ) : (
+                            <>
+                              <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
+                                <span className=" text-sm italic">
+                                  No response Specified
+                                </span>
+                              </div>
+                            </>
+                          )}
+                        </div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
-            </div> */}
+            </div>
           </div>
         </section>
         <section className="">

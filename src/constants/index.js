@@ -83,3 +83,5 @@ export const jsonData = {
   accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", // JWT accessToken (for backward compatibility) in response and cookies
   refreshToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", // refreshToken in response and cookies
 };
+
+export const responseCode = ["200", "201", "400", "501"];
