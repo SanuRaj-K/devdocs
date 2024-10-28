@@ -3,9 +3,8 @@ import Logo from "../../assets/icons/logo.svg";
 import search from "../../assets/icons/search.svg";
 import account from "../../assets/icons/account.svg";
 import dots from "../../assets/icons/3dot.svg";
-import { apiSections, jsonData, responseCode } from "../../constants";
+import { apiSections, jsonData, languages } from "../../constants";
 import { Accordioncomp } from "../../components/accordion";
-import nested from "../../assets/icons/nested.svg";
 import play from "../../assets/icons/play.svg";
 import select from "../../assets/icons/select.svg";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
@@ -14,33 +13,18 @@ import TemporaryDrawer from "../../components/drawer";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
 import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
 import { TestRun } from "../../components/run-test";
+import { CodeBlock } from "../../components/code-block";
+import { RequestBody } from "../../components/request-body";
+import { ResponseBody } from "../../components/response-body";
 export const Home = () => {
   const [toggleRun, setToggleRun] = useState(false);
+  const [selectedLanguage, setSelectedLanguage] = useState("cURL");
   const [copyText, setCopyText] = useState(false);
   const [selectedResponseCode, setSelectedResponseCode] = useState("200");
   const [showNested, setShowNexted] = useState(false);
+  const [showNestedTagResponse, setShowNextedTagResponse] = useState(false);
   const [showNestedResponse, setShowNextedResponse] = useState(false);
   const [selectedTitle, setSelectedTitle] = useState("");
-
-  const [isOpen, setIsOpen] = useState(false);
-
-  const languages = [
-    "cURL",
-    "Javascript",
-    "Python",
-    "Java",
-    "Go",
-    "C#",
-    "Kotlin",
-    "Objective C",
-    "PHP",
-    "Ruby",
-    "Swift",
-  ];
-
-  const toggleDropdown = () => {
-    setIsOpen(!isOpen);
-  };
 
   const handleTitleSelect = (title) => {
     setSelectedTitle(title);
@@ -147,7 +131,7 @@ export const Home = () => {
             <div className="   md:px-10 w-full xl:w-3/4">
               <div>
                 <h1 className=" text-[22px]    md:text-[24px]  font-bold">
-                  {selectedTitle ? selectedTitle : "update an existing pet"}
+                  {selectedTitle ? selectedTitle : "Update an existing pet"}
                 </h1>
                 <span className=" text-[14px] md:text-[16px]">
                   Update an existing pet by Id
@@ -156,215 +140,22 @@ export const Home = () => {
               {/* Request body */}
               <h2 className=" text-[20px] mt-5 font-semibold"> Request Body</h2>
               <div className="font-inter border-b-2   border-[#A7A7A7]  mt-5 pb-10 md:mt-5 flex-col md:flex-row flex md:justify-between w-full">
-                <div className="w-full md:w-2/3  overflow-y-auto   ">
-                  <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
-                    <ul className=" text-[14px] ">
-                      <li className=" border-b-2 py-2">name string</li>
-                      <li className=" border-b-2 py-2">
-                        <span className=" ">photoUrls</span>
-                        <span className=" ml-2 text-[#727272]">string[]</span>
-                      </li>
-                      <li className=" border-b-2 py-2">
-                        <span>id</span>
-                        <span className=" mx-2 text-[#727272]">integer</span>
-                        <span className="  font-medium px-[10px] text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                          Optional
-                        </span>{" "}
-                      </li>
-                      <li className=" border-b-2 py-2">
-                        <div>
-                          <div>
-                            <span>Category</span>
-                            <span className=" ml-2 text-[#727272]">
-                              object[]
-                            </span>
-                            <span className=" font-medium text-[12px] px-[10px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                              Optional
-                            </span>
-                          </div>
-                          <div
-                            onClick={() => setShowNexted((prev) => !prev)}
-                            className=" inline-flex  items-center cursor-pointer my-4 border-2 border-[#DADADA] rounded-lg p-2 bg-white "
-                          >
-                            <img
-                              className=" size-4"
-                              src={nested}
-                              alt="nested"
-                            />
-                            <span className=" ml-2">
-                              {showNested ? "Hide" : "Show"} nested properties
-                            </span>
-                          </div>
-                          {showNested && (
-                            <div className=" border-2 rounded-lg p-2">
-                              <div className="  border-b-2 p-3 rounded-md ">
-                                <span>id</span>
-                                <span className=" text-[#727272] px-3">
-                                  integer
-                                </span>
-                                <span className=" px-[10px]  font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                  Optional
-                                </span>
-                              </div>
-                              <div>
-                                <div className="  border-b-2 p-3 rounded-md ">
-                                  <span>id</span>
-                                  <span className=" text-[#727272] px-3">
-                                    string
-                                  </span>
-                                  <span className="   text-black px-[10px] py-1 font-medium     text-[12px] border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                    Optional
-                                  </span>
-                                </div>
-                              </div>
-                            </div>
-                          )}
-                        </div>
-                      </li>
-                      <li className="   mb-5">
-                        <div className=" my-2">
-                          <span>status</span>
-                          <span className=" ml-2 text-[#727272]">string</span>
-                          <span className=" px-[10px] font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                            Optional
-                          </span>
-                        </div>
-                        <div>
-                          <span className=" text-[#363636]">
-                            pet status in the store
-                          </span>
-                        </div>
-                      </li>
-                    </ul>
-                  </div>
+                <div className="w-full md:w-2/3  overflow-y-auto text-[10px]   ">
+                  <RequestBody />
+
                   <div className=" my-10">
-                  <hr />
+                    <hr />
                   </div>
-                 
+
                   {/* Responses */}
                   <div>
                     <h1 className=" text-[20px] font-bold text-[#020817]">
                       Responses
                     </h1>
-
-                    <div>
-                      <ul className=" my-3 inline-flex bg-[#f1f5f9] text-[#64748b] px-3 py-1 rounded-md text-[14px] font-medium">
-                        {responseCode?.map((item, index) => (
-                          <li
-                            onClick={() => setSelectedResponseCode(item)}
-                            key={index}
-                            className={`${
-                              selectedResponseCode === item
-                                ? " text-[#020817] rounded-md bg-white border-2 px-3"
-                                : ""
-                            } mx-3 cursor-pointer   `}
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                      {selectedResponseCode === "200" ? (
-                        <>
-                          <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
-                            <ul className=" text-[14px] ">
-                              <li className=" border-b-2 py-2">name string</li>
-                              <li className=" border-b-2 py-2">
-                                <span className=" ">photoUrls</span>
-                                <span className=" ml-2 text-[#727272]">
-                                  string[]
-                                </span>
-                              </li>
-                              <li className=" border-b-2 py-2">
-                                <span>id</span>
-                                <span className=" mx-2 text-[#727272]">
-                                  integer
-                                </span>
-                                <span className="  font-medium px-[10px] text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                  Optional
-                                </span>{" "}
-                              </li>
-                              <li className=" border-b-2 py-2">
-                                <div>
-                                  <div>
-                                    <span>Category</span>
-                                    <span className=" ml-2 text-[#727272]">
-                                      object[]
-                                    </span>
-                                    <span className=" font-medium text-[12px] px-[10px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                      Optional
-                                    </span>
-                                  </div>
-                                  <div
-                                    onClick={() =>
-                                      setShowNextedResponse((prev) => !prev)
-                                    }
-                                    className=" inline-flex  items-center cursor-pointer my-4 border-2 border-[#DADADA] rounded-lg p-2 bg-white "
-                                  >
-                                    <img
-                                      className=" size-4"
-                                      src={nested}
-                                      alt="nested"
-                                    />
-                                    <span className=" ml-2">
-                                      {showNestedResponse ? "Hide" : "Show"}{" "}
-                                      nested properties
-                                    </span>
-                                  </div>
-                                  {showNestedResponse && (
-                                    <div className=" border-2 rounded-lg p-2">
-                                      <div className="  border-b-2 p-3 rounded-md ">
-                                        <span>id</span>
-                                        <span className=" text-[#727272] px-3">
-                                          integer
-                                        </span>
-                                        <span className=" px-[10px]  font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                          Optional
-                                        </span>
-                                      </div>
-                                      <div>
-                                        <div className="  border-b-2 p-3 rounded-md ">
-                                          <span>id</span>
-                                          <span className=" text-[#727272] px-3">
-                                            string
-                                          </span>
-                                          <span className="   text-black px-[10px] py-1 font-medium     text-[12px] border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                            Optional
-                                          </span>
-                                        </div>
-                                      </div>
-                                    </div>
-                                  )}
-                                </div>
-                              </li>
-                              <li className="   mb-5">
-                                <div className=" my-2">
-                                  <span>status</span>
-                                  <span className=" ml-2 text-[#727272]">
-                                    string
-                                  </span>
-                                  <span className=" px-[10px] font-medium text-[12px] py-1 border-2 border-[#DADADA]  ml-3 rounded-lg">
-                                    Optional
-                                  </span>
-                                </div>
-                                <div>
-                                  <span className=" text-[#363636]">
-                                    pet status in the store
-                                  </span>
-                                </div>
-                              </li>
-                            </ul>
-                          </div>
-                        </>
-                      ) : (
-                        <>
-                          <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
-                            <span className=" text-sm italic">
-                              No response Specified
-                            </span>
-                          </div>
-                        </>
-                      )}
-                    </div>
+                    <ResponseBody
+                      selectedResponseCode={selectedResponseCode}
+                      setSelectedResponseCode={setSelectedResponseCode}
+                    />
                   </div>
                 </div>
                 <div className=" w-full md:w-1/3 mt-10 md:mt-0 md:ml-10 flex flex-col ">
@@ -385,22 +176,34 @@ export const Home = () => {
                           <img className="ml-2 size-2" src={play} alt="icon" />
                         </div>
                       </div>
-                      <div className="pb-3 group relative mt-3">
-                        <div
-                          onClick={handleCopy}
-                          className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
-                        >
-                          {copyText ? <DoneIcon /> : <ContentCopyIcon />}
-                        </div>
+                      <div className=" group relative mt-3">
+                        {selectedLanguage === "cURL" ? (
+                          <>
+                            <div
+                              onClick={handleCopy}
+                              className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
+                            >
+                              {copyText ? <DoneIcon /> : <ContentCopyIcon />}
+                            </div>
 
-                        <p className="text-[12px] ">
-                          <SyntaxHighlighter language="json" style={coy}>
-                            {JSON.stringify(jsonData, null, 2)}
-                          </SyntaxHighlighter>
-                        </p>
+                            <p className="text-[12px] ">
+                              <SyntaxHighlighter language="json" style={coy}>
+                                {JSON.stringify(jsonData, null, 2)}
+                              </SyntaxHighlighter>
+                            </p>
+                          </>
+                        ) : (
+                          <>
+                            <span className=" text-sm italic">
+                              <span className=" font-semibold mr-2">
+                                {selectedLanguage}
+                              </span>
+                              language code available soon
+                            </span>
+                          </>
+                        )}
                       </div>
                     </div>
-
                     <div className="flex relative border-t-2 pt-3 text-[12px]   border-[#DDDDDD]  mt-10 items-center justify-end">
                       <span className="mr-5">show example in</span>
                       <img
@@ -409,10 +212,13 @@ export const Home = () => {
                         alt="select"
                       />
 
-                      <select className=" px-3 rounded-md  appearance-none h-[30px] ">
+                      <select
+                        onChange={(e) => setSelectedLanguage(e.target.value)}
+                        className=" px-3 rounded-md  appearance-none h-[30px] "
+                      >
                         {languages.map((language, index) => (
                           <option key={index} className=" " value={language}>
-                            {language}
+                            <div>{language}</div>
                           </option>
                         ))}
                       </select>
@@ -420,96 +226,17 @@ export const Home = () => {
                   </div>
                   {/* Request body examples */}
                   <div className=" my-5">
-                    <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
-                      <div>
-                        <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
-                          <div>
-                            <span className=" text-sm">
-                              Request body example
-                            </span>
-                          </div>
-                        </div>
-                        <div className="pb-3 group relative mt-3">
-                          <div
-                            onClick={handleCopy}
-                            className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
-                          >
-                            {copyText ? <DoneIcon /> : <ContentCopyIcon />}
-                          </div>
-
-                          <p className="text-[12px] ">
-                            <SyntaxHighlighter language="json" style={coy}>
-                              {JSON.stringify(jsonData, null, 2)}
-                            </SyntaxHighlighter>
-                          </p>
-                        </div>
-                      </div>
-                    </div>
+                    <CodeBlock id={false} title={"Request body example"} />
                   </div>
                   {/* examples response */}
                   <div>
                     <div className=" my-5">
-                      <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
-                        <div className=" ">
-                          <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
-                            <div>
-                              <span className=" text-sm">
-                                Example Responses
-                              </span>
-                            </div>
-                          </div>
-                          <div>
-                            <ul className=" text-[12px] mt-3 flex">
-                              {responseCode?.map((item, index) => (
-                                <li
-                                  onClick={() => setSelectedResponseCode(item)}
-                                  className={`${
-                                    selectedResponseCode === item
-                                      ? " text-[#020817] rounded-md bg-white border-2 px-3"
-                                      : ""
-                                  } mx-3 cursor-pointer   `}
-                                  key={index}
-                                >
-                                  {item}
-                                </li>
-                              ))}
-                            </ul>
-                          </div>
-                          {selectedResponseCode === "200" ? (
-                            <>
-                              <div className="pb-3 group relative mt-3">
-                                <div
-                                  onClick={handleCopy}
-                                  className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
-                                >
-                                  {copyText ? (
-                                    <DoneIcon />
-                                  ) : (
-                                    <ContentCopyIcon />
-                                  )}
-                                </div>
-
-                                <p className="text-[12px] ">
-                                  <SyntaxHighlighter
-                                    language="json"
-                                    style={coy}
-                                  >
-                                    {JSON.stringify(jsonData, null, 2)}
-                                  </SyntaxHighlighter>
-                                </p>
-                              </div>
-                            </>
-                          ) : (
-                            <>
-                              <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
-                                <span className=" text-sm italic">
-                                  No response Specified
-                                </span>
-                              </div>
-                            </>
-                          )}
-                        </div>
-                      </div>
+                      <CodeBlock
+                        selectedResponseCode={selectedResponseCode}
+                        setSelectedResponseCode={setSelectedResponseCode}
+                        id={true}
+                        title={"Example Responses"}
+                      />
                     </div>
                   </div>
                 </div>

@@ -85,3 +85,16 @@ export const jsonData = {
 };
 
 export const responseCode = ["200", "201", "400", "501"];
+export const languages = [
+  "cURL",
+  "Javascript",
+  "Python",
+  "Java",
+  "Go",
+  "C#",
+  "Kotlin",
+  "Objective C",
+  "PHP",
+  "Ruby",
+  "Swift",
+];
