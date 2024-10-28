@@ -78,6 +78,8 @@ export const jsonData = {
   email: "emily.johnson@x.dummyjson.com",
   firstName: "Emily",
   lastName: "Johnson",
+  place:'Somewhere',
+
   gender: "female",
   image: "https://dummyjson.com/icon/emilys/128",
   accessToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...", // JWT accessToken (for backward compatibility) in response and cookies

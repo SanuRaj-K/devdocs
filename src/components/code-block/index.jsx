@@ -30,8 +30,6 @@ export const CodeBlock = ({
     }, 3000);
   }
 
-  console.log(selectedLanguage);
-
   return (
     <div>
       <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
@@ -172,7 +170,7 @@ export const CodeBlock = ({
             </select>
           </div>
         )}
-        
+
         {id && (
           <span className=" border-t-2 pt-2 mt-2 text-[10px] capitalize font-medium  text-right">
             {selectedResponseCode === "200"
