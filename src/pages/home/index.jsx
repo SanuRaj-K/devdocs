@@ -65,7 +65,7 @@ export const Home = () => {
           <TemporaryDrawer />
         </div>
       </section>
-      <div className="relative px-7">
+      <div className="relative pt-5 md:pt-10  px-7">
         <section className="font-poppins">
           <div className="flex w-full  justify-between items-center">
             <h1 className="font-bold text-[20px] md:text-[30px] xl:text-[36px] capitalize">
@@ -78,7 +78,7 @@ export const Home = () => {
             />
           </div>
           <div>
-            <p className="mt-4 md:my-5 text-[12px] w-full md:text-[14px] lg:text-[16px] leading-[24px]">
+            <p className="mt-4 md:my-5 text-[12px] w-full md:text-[14px]  leading-[24px]">
               This is a sample Pet Store Server based on the OpenAPI 3.0
               specification. You can find out more about Swagger at
               <a
