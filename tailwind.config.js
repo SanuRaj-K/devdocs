@@ -9,8 +9,8 @@ module.exports = {
         albert: ["Albert", "sans-serif"],
         poppins: ["poppins", "sans-serif"],
         inter: ["Inter", "sans-serif"],
-      }, 
+      },
     },
   },
-  plugins: [],
+  plugins: [require("tailwind-scrollbar")],
 };

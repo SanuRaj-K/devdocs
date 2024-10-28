@@ -24,6 +24,11 @@ export const CodeBlock = ({
       setCopyText(true);
     });
   };
+  if (copyText) {
+    setTimeout(() => {
+      setCopyText(false);
+    }, 3000);
+  }
 
   console.log(selectedLanguage);
 
@@ -140,9 +145,7 @@ export const CodeBlock = ({
               ) : (
                 <>
                   <div className=" bg-[#F9FAFC]  rounded-lg p-3 border-2 w-full">
-                    <span className=" text-sm italic">
-                      Empty response
-                    </span>
+                    <span className=" text-[12px] italic">Empty response</span>
                   </div>
                 </>
               ))}
@@ -169,11 +172,12 @@ export const CodeBlock = ({
             </select>
           </div>
         )}
+        
         {id && (
-          <span className=" mt-2 text-[10px] font-medium  text-right">
+          <span className=" border-t-2 pt-2 mt-2 text-[10px] capitalize font-medium  text-right">
             {selectedResponseCode === "200"
               ? "Successfull operation"
-              : "invalid"}
+              : "invalid input"}
           </span>
         )}
       </div>

@@ -7,7 +7,15 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 export const Accordioncomp = ({ title, method, onSelectTitle }) => {
   return (
     <div className=" font-poppins">
-      <Accordion defaultExpanded>
+      <Accordion
+        sx={{
+          boxShadow: "none",
+          "&:before": {
+            display: "none",
+          },
+        }}
+        defaultExpanded
+      >
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1-content"
