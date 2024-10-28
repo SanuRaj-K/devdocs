@@ -3,28 +3,18 @@ import Logo from "../../assets/icons/logo.svg";
 import search from "../../assets/icons/search.svg";
 import account from "../../assets/icons/account.svg";
 import dots from "../../assets/icons/3dot.svg";
-import { apiSections, jsonData, languages } from "../../constants";
+import { apiSections } from "../../constants";
 import { Accordioncomp } from "../../components/accordion";
-import play from "../../assets/icons/play.svg";
-import select from "../../assets/icons/select.svg";
-import ContentCopyIcon from "@mui/icons-material/ContentCopy";
-import DoneIcon from "@mui/icons-material/Done";
-import TemporaryDrawer from "../../components/drawer";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import { coy } from "react-syntax-highlighter/dist/esm/styles/prism";
-import { TestRun } from "../../components/run-test";
+  import TemporaryDrawer from "../../components/drawer";
+ import { TestRun } from "../../components/run-test";
 import { CodeBlock } from "../../components/code-block";
 import { RequestBody } from "../../components/request-body";
 import { ResponseBody } from "../../components/response-body";
 export const Home = () => {
   const [toggleRun, setToggleRun] = useState(false);
-  const [selectedLanguage, setSelectedLanguage] = useState("cURL");
-  const [copyText, setCopyText] = useState(false);
+   const [copyText, setCopyText] = useState(false);
   const [selectedResponseCode, setSelectedResponseCode] = useState("200");
-  const [showNested, setShowNexted] = useState(false);
-  const [showNestedTagResponse, setShowNextedTagResponse] = useState(false);
-  const [showNestedResponse, setShowNextedResponse] = useState(false);
-  const [selectedTitle, setSelectedTitle] = useState("");
+   const [selectedTitle, setSelectedTitle] = useState("");
 
   const handleTitleSelect = (title) => {
     setSelectedTitle(title);
@@ -44,11 +34,7 @@ export const Home = () => {
     }, 3000);
   }
 
-  const handleCopy = () => {
-    navigator.clipboard.writeText(JSON.stringify(jsonData)).then(() => {
-      setCopyText(true);
-    });
-  };
+   
   return (
     <div>
       <header className="  bg-white/20 border-b-2 lg:sticky backdrop-blur-md top-0  z-10 w-full">
@@ -140,7 +126,7 @@ export const Home = () => {
               {/* Request body */}
               <h2 className=" text-[20px] mt-5 font-semibold"> Request Body</h2>
               <div className="font-inter border-b-2   border-[#A7A7A7]  mt-5 pb-10 md:mt-5 flex-col md:flex-row flex md:justify-between w-full">
-                <div className="w-full md:w-2/3  overflow-y-auto text-[10px]   ">
+                <div className="w-full md:w-3/5  overflow-y-auto text-[10px]   ">
                   <RequestBody />
 
                   <div className=" my-10">
@@ -158,75 +144,18 @@ export const Home = () => {
                     />
                   </div>
                 </div>
-                <div className=" w-full md:w-1/3 mt-10 md:mt-0 md:ml-10 flex flex-col ">
-                  <div className=" bg-[#F4F4F5] p-3 rounded-lg border-2 flex flex-col justify-between ">
-                    <div>
-                      <div className="border-b-2 border-[#DDDDDD] pb-3 fb items-center">
-                        <div>
-                          <span className="text-[#FACC15]">PUT</span>
-                          <span>/pet</span>
-                        </div>
-                        <div
-                          onClick={() => setToggleRun(true)}
-                          className="flex items-center cursor-pointer bg-[#4E80ED] rounded-md px-2 py-1"
-                        >
-                          <span className="text-white font-medium text-[12px]">
-                            Test
-                          </span>
-                          <img className="ml-2 size-2" src={play} alt="icon" />
-                        </div>
-                      </div>
-                      <div className=" group relative mt-3">
-                        {selectedLanguage === "cURL" ? (
-                          <>
-                            <div
-                              onClick={handleCopy}
-                              className=" absolute  group-hover:block cursor-pointer  right-0 z-20  hidden top-0 mr-2 size-1 "
-                            >
-                              {copyText ? <DoneIcon /> : <ContentCopyIcon />}
-                            </div>
-
-                            <p className="text-[12px] ">
-                              <SyntaxHighlighter language="json" style={coy}>
-                                {JSON.stringify(jsonData, null, 2)}
-                              </SyntaxHighlighter>
-                            </p>
-                          </>
-                        ) : (
-                          <>
-                            <span className=" text-sm italic">
-                              <span className=" font-semibold mr-2">
-                                {selectedLanguage}
-                              </span>
-                              language code available soon
-                            </span>
-                          </>
-                        )}
-                      </div>
-                    </div>
-                    <div className="flex relative border-t-2 pt-3 text-[12px]   border-[#DDDDDD]  mt-10 items-center justify-end">
-                      <span className="mr-5">show example in</span>
-                      <img
-                        className="  absolute  right-0 z-10 "
-                        src={select}
-                        alt="select"
-                      />
-
-                      <select
-                        onChange={(e) => setSelectedLanguage(e.target.value)}
-                        className=" px-3 rounded-md  appearance-none h-[30px] "
-                      >
-                        {languages.map((language, index) => (
-                          <option key={index} className=" " value={language}>
-                            <div>{language}</div>
-                          </option>
-                        ))}
-                      </select>
-                    </div>
+                <div className=" w-full md:w-2/5 mt-10 md:mt-0 md:ml-10 flex md:flex-col flex-col-reverse ">
+                  {/* test code block */}
+                  <div>
+                    <CodeBlock
+                      id={false}
+                      setToggleRun={setToggleRun}
+                      item={"1"}
+                    />
                   </div>
                   {/* Request body examples */}
                   <div className=" my-5">
-                    <CodeBlock id={false} title={"Request body example"} />
+                    <CodeBlock id={false} item={'2'} title={"Request body example"} />
                   </div>
                   {/* examples response */}
                   <div>
