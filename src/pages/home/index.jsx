@@ -39,7 +39,7 @@ export const Home = () => {
   return (
     <div>
       <header className="bg-white/20 border-b-2 lg:sticky backdrop-blur-md top-0 z-10 w-full">
-        <div className="flex items-center p-3 md:p-4">
+        <div className="flex items-center justify-between p-3 md:p-4">
           <div className="font-poppins flex items-center">
             <img
               className="w-[80px] md:w-[120px] cursor-pointer"
@@ -119,7 +119,7 @@ export const Home = () => {
             </div>
 
             {/* Right Section */}
-            <div className="w-full xl:w-3/4 scrollbar-none md:px-10 overflow-y-auto h-screen">
+            <div className="w-full xl:w-3/4 scrollbar-none md:px-10 md:overflow-y-auto h-screen">
               <div>
                 <h1 className="text-[22px] md:text-[24px] font-bold">
                   {selectedTitle || "Update an existing pet"}
